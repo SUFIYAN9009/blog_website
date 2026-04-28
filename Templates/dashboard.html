@@ -1,0 +1,144 @@
+{% extends 'header_footer.html' %}
+
+{% block base %}
+
+<div class="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white px-6 py-10">
+
+    <!-- HEADER -->
+    <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-10">
+
+        <div>
+            <h1 class="text-3xl md:text-4xl font-bold">
+                Welcome, {{ request.user.username }} 👋
+            </h1>
+            <p class="text-gray-400 text-sm mt-1">
+                Manage your posts and explore your journey
+            </p>
+        </div>
+
+        <!-- ACTION BUTTONS -->
+        <div class="flex gap-3 mt-4 md:mt-0">
+            <a href="{% url 'create_post' %}"
+               class="px-5 py-2 bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg shadow-lg hover:scale-105 transition">
+                + Create
+            </a>
+
+            <a href="{% url 'home' %}"
+               class="px-5 py-2 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-lg shadow-lg hover:scale-105 transition">
+                Home
+            </a>
+        </div>
+
+    </div>
+
+    <!-- STATS -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+
+        <div class="bg-white/10 backdrop-blur-lg p-6 rounded-xl shadow hover:scale-105 transition">
+            <h2 class="text-lg text-gray-300">Your Posts</h2>
+            <p class="text-3xl font-bold mt-2">
+                {{ posts.count }}
+            </p>
+        </div>
+
+        <div class="bg-white/10 backdrop-blur-lg p-6 rounded-xl shadow hover:scale-105 transition">
+            <h2 class="text-lg text-gray-300">Total Likes</h2>
+            <p class="text-3xl font-bold mt-2">
+                {% for post in posts %}
+                    {{ post.total_likes }}
+                {% endfor %}
+            </p>
+        </div>
+
+        <div class="bg-white/10 backdrop-blur-lg p-6 rounded-xl shadow hover:scale-105 transition">
+            <h2 class="text-lg text-gray-300">Account</h2>
+            <p class="text-lg mt-2">
+                Active User
+            </p>
+        </div>
+
+    </div>
+
+    <!-- CATEGORY CARDS -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+
+        <div class="group p-6 bg-gradient-to-br from-blue-500/20 to-blue-700/20 rounded-xl hover:scale-105 transition cursor-pointer">
+            <h2 class="text-xl font-bold">📖 Story</h2>
+            <p class="text-gray-300 text-sm mt-2">Share your travel story</p>
+        </div>
+
+        <div class="group p-6 bg-gradient-to-br from-green-500/20 to-green-700/20 rounded-xl hover:scale-105 transition cursor-pointer">
+            <h2 class="text-xl font-bold">🧭 Guide</h2>
+            <p class="text-gray-300 text-sm mt-2">Create travel guides</p>
+        </div>
+
+        <div class="group p-6 bg-gradient-to-br from-pink-500/20 to-pink-700/20 rounded-xl hover:scale-105 transition cursor-pointer">
+            <h2 class="text-xl font-bold">✨ Experience</h2>
+            <p class="text-gray-300 text-sm mt-2">Share experiences</p>
+        </div>
+
+    </div>
+
+    <!-- USER POSTS -->
+    <div>
+        <h2 class="text-2xl font-bold mb-6">Your Posts</h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            {% for post in posts %}
+
+            <div class="group relative bg-black rounded-xl overflow-hidden shadow-lg">
+
+                <!-- IMAGE -->
+                <div class="h-52 overflow-hidden">
+                    {% if post.picture %}
+                        <img src="{{ post.picture.url }}"
+                             class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    {% endif %}
+                </div>
+
+                <!-- CONTENT -->
+                <div class="p-4">
+
+                    <span class="text-xs text-gray-400 uppercase">
+                        {{ post.category }}
+                    </span>
+
+                    <h3 class="text-lg font-bold mt-1">
+                        {{ post.title }}
+                    </h3>
+
+                    <p class="text-sm text-gray-400 mt-1 line-clamp-2">
+                        {{ post.description }}
+                    </p>
+
+                    <!-- LIKE -->
+                    <div class="mt-3 flex justify-between items-center">
+
+                        <span class="text-sm text-gray-300">
+                            ❤️ {{ post.total_likes }}
+                        </span>
+
+                        <a href="{% url 'cart1' post.id %}"
+                           class="text-xs bg-white/10 px-3 py-1 rounded-full hover:bg-white hover:text-black transition">
+                            View →
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% empty %}
+
+            <p class="text-gray-400">No posts yet. Create your first post 🚀</p>
+
+            {% endfor %}
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

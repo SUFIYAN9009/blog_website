@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>PakAdventure | Pakistan Travel Blog</title>
+
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;500;600;700&family=Be+Vietnam+Pro:wght@400;500;700&display=swap" rel="stylesheet"/>
+
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+
+<style>
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;
+}
+</style>
+</head>
+
+<body class="bg-white text-black">
+
+<!-- ================= HEADER ================= -->
+<header class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b">
+
+<div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
+
+<div class="flex justify-between items-center h-16 sm:h-20">
+
+    <!-- LOGO -->
+    <div class="text-lg sm:text-xl font-bold text-emerald-900">
+        PakAdventure
+    </div>
+
+    <!-- DESKTOP NAV -->
+    <nav class="hidden md:flex items-center gap-6 text-sm">
+        <a href="{% url 'home' %}" class="hover:text-emerald-700">Destinations</a>
+        <a href="{% url 'stories1' %}" class="hover:text-emerald-700">Stories</a>
+        <a href="{% url 'guides' %}" class="hover:text-emerald-700">Guides</a>
+      
+    </nav>
+
+    <!-- ACTIONS -->
+    <div class="flex items-center gap-3">
+
+        <a href="{% url 'signup' %}" class="hidden sm:block text-sm hover:text-emerald-700">
+            Sign In
+        </a>
+
+        <button class="bg-emerald-700 text-white px-4 sm:px-6 py-2 rounded-lg text-xs sm:text-sm">
+            Book Guide
+        </button>
+
+        <!-- MOBILE BUTTON -->
+        <button id="menuBtn" class="md:hidden text-2xl">
+            <span class="material-symbols-outlined">menu</span>
+        </button>
+
+    </div>
+
+</div>
+
+</div>
+
+<!-- MOBILE MENU -->
+<div id="mobileMenu" class="hidden md:hidden border-t bg-white px-4 py-4 space-y-3 text-sm">
+
+    <a href="{% url 'home' %}" class="block hover:text-emerald-700">Destinations</a>
+    <a href="{% url 'stories1' %}" class="block hover:text-emerald-700">Stories</a>
+    <a href="{% url 'guides' %}" class="block hover:text-emerald-700">Guides</a>
+    <a href="{% url 'about' %}" class="block hover:text-emerald-700">About</a>
+    <a href="{% url 'signup' %}" class="block text-emerald-700">Sign In</a>
+
+</div>
+
+</header>
+
+<!-- ================= CONTENT ================= -->
+<main class="pt-20">
+{% block base %}
+{% endblock base %}
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="bg-gray-50 border-t mt-20 py-12">
+
+<div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+    <div>
+        <h2 class="font-bold text-lg mb-3">PakAdventure</h2>
+        <p class="text-sm text-gray-600">
+            Explore Pakistan’s mountains, culture, and hidden beauty.
+        </p>
+    </div>
+
+    <div>
+        <h3 class="font-bold mb-3">Explore</h3>
+        <ul class="space-y-2 text-sm text-gray-600">
+            <li><a href="{% url 'home' %}" class="hover:text-emerald-700">Destinations</a></li>
+            <li><a href="{% url 'stories1' %}" class="hover:text-emerald-700">Stories</a></li>
+            <li><a href="{% url 'guides' %}" class="hover:text-emerald-700">Guides</a></li>
+        </ul>
+    </div>
+
+    <div>
+        <h3 class="font-bold mb-3">Company</h3>
+        <ul class="space-y-2 text-sm text-gray-600">
+            <li><a href="{% url 'about' %}" class="hover:text-emerald-700">About</a></li>
+            <li><a href="#" class="hover:text-emerald-700">Contact</a></li>
+        </ul>
+    </div>
+
+    <div>
+        <h3 class="font-bold mb-3">Newsletter</h3>
+        <input class="w-full border p-2 text-sm rounded" placeholder="Enter email"/>
+        <button class="mt-2 w-full bg-emerald-700 text-white py-2 rounded text-sm">
+            Subscribe
+        </button>
+    </div>
+
+</div>
+
+<div class="text-center text-xs text-gray-500 mt-10">
+    © 2026 PakAdventure. All rights reserved.
+</div>
+
+</footer>
+
+<!-- ================= JS ================= -->
+<script>
+const menuBtn = document.getElementById("menuBtn");
+const mobileMenu = document.getElementById("mobileMenu");
+
+menuBtn.addEventListener("click", () => {
+    mobileMenu.classList.toggle("hidden");
+});
+</script>
+
+</body>
+</html>

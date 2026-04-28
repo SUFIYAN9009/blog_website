@@ -1,0 +1,44 @@
+{% extends 'header_footer.html' %}
+
+{% block base %}
+
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-800 px-4">
+
+    <form method="POST" enctype="multipart/form-data"
+          class="w-full max-w-md bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-8 text-white shadow-2xl">
+
+        {% csrf_token %}
+
+        <h2 class="text-2xl font-bold mb-6 text-center">Create New Post</h2>
+
+        <!-- TITLE -->
+        <input type="text" name="title" placeholder="Title"
+               class="w-full mb-4 p-2 rounded bg-black/30 border border-white/20 focus:outline-none">
+
+        <!-- DESCRIPTION -->
+        <textarea name="description" placeholder="Description"
+                  class="w-full mb-4 p-2 rounded bg-black/30 border border-white/20 focus:outline-none"></textarea>
+
+        <!-- CATEGORY -->
+        <select name="category"
+                class="w-full mb-4 p-2 rounded bg-black/30 border border-white/20">
+            <option value="story">Story</option>
+            <option value="guide">Guide</option>
+            <option value="experience">Experience</option>
+        </select>
+
+        <!-- IMAGE -->
+        <input type="file" name="picture"
+               class="w-full mb-4 text-sm text-gray-300">
+
+        <!-- BUTTON -->
+        <button type="submit"
+                class="w-full bg-green-500 py-2 rounded hover:bg-green-600 transition">
+            Publish
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}

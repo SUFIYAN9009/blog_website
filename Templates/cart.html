@@ -1,0 +1,117 @@
+{% extends 'header_footer.html' %}
+
+{% block base %}
+
+<main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 text-white">
+
+<!-- IMAGE -->
+<div class="w-full h-[220px] sm:h-[300px] md:h-[400px] overflow-hidden rounded-xl mb-5 sm:mb-6 shadow-lg">
+
+    {% if post.picture %}
+        <img src="{{ post.picture.url }}"
+             class="w-full h-full object-cover">
+    {% else %}
+        <img src="https://via.placeholder.com/800x500"
+             class="w-full h-full object-cover">
+    {% endif %}
+
+</div>
+
+<!-- TITLE -->
+<h1 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 leading-snug">
+    {{ post.title }}
+</h1>
+
+<!-- META -->
+<div class="flex items-center justify-between mb-5 sm:mb-6 text-sm text-gray-400">
+    <span>{{ post.created_at|date:"M d, Y" }}</span>
+    <span class="bg-white/10 px-3 py-1 rounded-full text-xs uppercase">
+        {{ post.category }}
+    </span>
+</div>
+
+<!-- DESCRIPTION -->
+<p class="text-gray-300 text-base sm:text-lg leading-relaxed mb-6">
+    {{ post.description }}
+</p>
+
+<!-- ❤️ LIKE SECTION (FIXED) -->
+<div class="mb-10 flex items-center gap-4">
+
+    <!-- LIKE BUTTON (NEW) -->
+    <a href="{% url 'like_post' post.id %}"
+       class="px-5 py-2 rounded-full bg-red-500/20 hover:bg-red-500 hover:scale-105 transition">
+
+        ❤️ Like
+
+    </a>
+
+    <!-- LIKE COUNT -->
+    <span class="text-sm bg-white/10 px-4 py-2 rounded-full">
+        {{ post.likes.count }} Likes
+    </span>
+
+</div>
+
+<!-- 💬 COMMENTS SECTION -->
+<div class="mt-12">
+
+    <h2 class="text-xl sm:text-2xl font-bold mb-6">Comments 💬</h2>
+
+    <!-- COMMENT FORM -->
+    {% if user.is_authenticated %}
+    <form method="POST" action="{% url 'add_comment' post.id %}"
+          class="mb-8 bg-white/5 p-4 rounded-xl border border-white/10">
+
+        {% csrf_token %}
+
+        <textarea name="text" placeholder="Write your thoughts..."
+                  class="w-full p-3 rounded-lg bg-black/40 border border-white/20 text-white mb-3 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+
+        <button type="submit"
+                class="px-5 py-2 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-lg hover:scale-105 transition">
+            Post Comment
+        </button>
+
+    </form>
+    {% else %}
+        <p class="text-gray-400 mb-6">
+            Please <a href="{% url 'login' %}" class="text-blue-400 underline">login</a> to comment.
+        </p>
+    {% endif %}
+
+    <!-- COMMENTS LIST -->
+    <div class="space-y-4">
+
+        {% for comment in post.comments.all %}
+
+        <div class="p-4 bg-white/10 rounded-xl shadow hover:bg-white/15 transition">
+
+            <div class="flex justify-between items-center mb-2">
+                <span class="font-semibold text-sm">
+                    {{ comment.user.username }}
+                </span>
+                <span class="text-xs text-gray-400">
+                    {{ comment.created_at|timesince }} ago
+                </span>
+            </div>
+
+            <p class="text-gray-300 text-sm leading-relaxed">
+                {{ comment.text }}
+            </p>
+
+        </div>
+
+        {% empty %}
+            <p class="text-gray-400">
+                No comments yet. Be the first 🚀
+            </p>
+        {% endfor %}
+
+    </div>
+
+</div>
+
+</main>
+
+{% endblock base %}
