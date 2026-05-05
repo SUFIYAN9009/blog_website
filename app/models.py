@@ -21,7 +21,7 @@ class TravelPost(models.Model):
 
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES)
 
-    picture = models.ImageField(upload_to='travel/', blank=True, null=True)
+    picture = models.ImageField(upload_to='guides/', blank=True, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -52,3 +52,62 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.post.title}"
+    
+
+    
+class Guide(models.Model):
+    SPECIALTY_CHOICES = [
+        ('k2', 'K2 Base Camp'),
+        ('alpine', 'Alpine Mountaineering'),
+        ('culture', 'Cultural Heritage'),
+        ('photo', 'Photography'),
+    ]
+
+    REGION_CHOICES = [
+        ('Skardu', 'Skardu'),
+        ('Hunza', 'Hunza'),
+        ('Swat', 'Swat'),
+        ('Kalam', 'Kalam'),
+    ]
+
+    name = models.CharField(max_length=200)
+    image = models.ImageField(upload_to='guides/', null=True, blank=True)
+
+    specialty = models.CharField(max_length=100, choices=SPECIALTY_CHOICES)
+    experience = models.IntegerField()
+
+    location = models.CharField(max_length=100, choices=REGION_CHOICES)
+
+    bio = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return self.name 
+
+
+class Booking(models.Model):
+
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('approved', 'Approved'),
+        ('rejected', 'Rejected'),
+    ]
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    guide = models.ForeignKey('Guide', on_delete=models.CASCADE)
+
+    date = models.DateField()   # ⭐ IMPORTANT FIX
+    message = models.TextField(blank=True, null=True)
+
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default='pending'
+    )
+
+    created_at = models.DateTimeField(auto_now_add=True, null=True) # ⭐ IMPORTANT FIX
+
+    def __str__(self):
+        return f"{self.user.username} - {self.guide.name} ({self.status})"
+
+
+

@@ -30,6 +30,9 @@ urlpatterns = [
     path('header_footer/', views.header_footer, name='header_footer'),
     path('stories/', views.stories, name='stories1'),
     path('guides/', views.guides, name='guides'),
+    path('guides/<int:id>/', views.guide_detail, name='guide_detail'),
+    path('book/<int:guide_id>/', views.book_guide, name='book_guide'),
+    path('my-bookings/', views.my_bookings, name='my_bookings'),
     path('cart/<int:id>/', views.cart_image, name='cart1'),
 
     path('', views.signup, name='signup'),

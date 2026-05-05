@@ -1,0 +1,136 @@
+{% extends 'header_footer.html' %}
+{% block base %}
+
+<main class="pt-20 bg-gradient-to-b from-gray-50 to-white min-h-screen">
+
+<section class="max-w-6xl mx-auto px-4 py-14">
+
+    <!-- ================= HEADER ================= -->
+    <div class="mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-gray-900">
+            My Bookings
+        </h1>
+        <p class="text-gray-500 mt-2 text-sm md:text-base">
+            Track, manage, and monitor your guide adventures in real time
+        </p>
+    </div>
+
+    <!-- ================= BOOKINGS LIST ================= -->
+    <div class="space-y-6">
+
+    {% for booking in bookings %}
+
+        <div class="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 p-5 md:p-6 flex flex-col md:flex-row justify-between gap-6">
+
+            <!-- ================= LEFT SIDE ================= -->
+            <div class="flex items-center gap-5">
+
+                <!-- IMAGE -->
+                {% if booking.guide.image %}
+                    <img src="{{ booking.guide.image.url }}"
+                         class="w-24 h-24 md:w-28 md:h-28 rounded-xl object-cover group-hover:scale-105 transition duration-300">
+                {% else %}
+                    <div class="w-24 h-24 md:w-28 md:h-28 rounded-xl bg-gray-100 flex items-center justify-center text-gray-400 text-sm">
+                        No Image
+                    </div>
+                {% endif %}
+
+                <!-- INFO -->
+                <div>
+
+                    <h3 class="text-xl font-semibold text-gray-900 group-hover:text-emerald-700 transition">
+                        {{ booking.guide.name }}
+                    </h3>
+
+                    <p class="text-sm text-gray-500 mt-1">
+                        📍 {{ booking.guide.get_location_display }}
+                    </p>
+
+                    <p class="text-sm text-gray-500">
+                        📅 {{ booking.date }}
+                    </p>
+
+                    {% if booking.message %}
+                        <p class="text-sm text-gray-400 mt-2 italic">
+                            “{{ booking.message }}”
+                        </p>
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+            <!-- ================= RIGHT SIDE (STATUS) ================= -->
+            <div class="flex flex-col justify-between items-start md:items-end">
+
+                {% if booking.status == 'approved' %}
+                    <span class="inline-flex items-center gap-2 px-4 py-1 text-xs font-semibold rounded-full bg-green-50 text-green-700 border border-green-200">
+                        <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                        Approved
+                    </span>
+
+                {% elif booking.status == 'rejected' %}
+                    <span class="inline-flex items-center gap-2 px-4 py-1 text-xs font-semibold rounded-full bg-red-50 text-red-700 border border-red-200">
+                        <span class="w-2 h-2 bg-red-500 rounded-full"></span>
+                        Rejected
+                    </span>
+
+                {% else %}
+                    <span class="inline-flex items-center gap-2 px-4 py-1 text-xs font-semibold rounded-full bg-yellow-50 text-yellow-700 border border-yellow-200">
+                        <span class="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></span>
+                        Pending
+                    </span>
+                {% endif %}
+
+                <p class="text-xs text-gray-400 mt-3 text-right">
+                    Status updated by admin
+                </p>
+
+                <p class="text-xs text-gray-400 mt-1">
+                    Booked on {{ booking.created_at|date:"M d, Y" }}
+                </p>
+
+            </div>
+
+        </div>
+
+    {% empty %}
+
+        <!-- ================= EMPTY STATE ================= -->
+        <div class="text-center py-28 bg-white rounded-2xl border shadow-sm">
+
+            <div class="text-6xl mb-4">🧭</div>
+
+            <h3 class="text-2xl font-semibold text-gray-900">
+                No bookings yet
+            </h3>
+
+            <p class="text-gray-500 mt-2 max-w-md mx-auto">
+                You haven’t booked any guide yet. Explore guides and start your journey.
+            </p>
+
+            <div class="mt-6 flex justify-center gap-3">
+
+                <a href="{% url 'guides' %}"
+                   class="bg-emerald-700 hover:bg-emerald-800 text-white px-6 py-3 rounded-xl shadow-md transition">
+                   Explore Guides
+                </a>
+
+                <a href="/"
+                   class="border px-6 py-3 rounded-xl hover:bg-gray-50 transition">
+                   Back Home
+                </a>
+
+            </div>
+
+        </div>
+
+    {% endfor %}
+
+    </div>
+
+</section>
+
+</main>
+
+{% endblock %}

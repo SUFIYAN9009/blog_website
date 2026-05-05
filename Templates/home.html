@@ -4,88 +4,120 @@
 
 <main>
 
-<!-- Hero Section -->
-<section class="relative h-screen w-full flex items-end overflow-hidden">
+<!-- HERO SECTION (ELITE UX FINAL) -->
+<section class="relative h-[70vh] md:h-[90vh] w-full flex items-end overflow-hidden">
     <div class="absolute inset-0 z-0">
         <img class="w-full h-full object-cover"
             src="https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg" />
-        <div class="absolute inset-0 hero-gradient"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/20"></div>
+    </div>
+
+    <div class="relative z-10 max-w-5xl px-6 pb-12">
+        <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold leading-tight">
+           
+        </h1>
+
+        <p class="text-gray-300 mt-4 max-w-xl text-sm md:text-base">
+            Real journeys, hidden gems, and unforgettable experiences from travelers around the world.
+        </p>
+
+        <div class="mt-4 text-xs text-gray-400 flex gap-4 flex-wrap">
+            <span>🔥 1K+ stories</span>
+            <span>🌍 50+ destinations</span>
+            <span>❤️ 10K+ likes</span>
+        </div>
+
+        <div class="mt-6 flex gap-3 flex-wrap">
+            <a href="#posts"
+               class="px-5 py-2 bg-white text-black rounded-full text-sm font-medium hover:scale-105 transition">
+                Explore Now
+            </a>
+            <a href="{% url 'create_post' %}"
+               class="px-5 py-2 bg-white/10 backdrop-blur rounded-full text-sm hover:bg-white hover:text-black transition">
+                Share Story
+            </a>
+        </div>
     </div>
 </section>
 
-<!-- Featured Section -->
-<section class="mt-section-gap max-w-screen-2xl mx-auto px-4 md:px-8">
+<!-- FEATURED SECTION -->
+<section id="posts" class="mt-20 max-w-screen-2xl mx-auto px-4 md:px-8">
 
     <!-- HEADER + FILTER -->
     <div class="flex flex-col md:flex-row md:justify-between md:items-end mb-10 gap-4">
 
         <div>
-            <span class="font-label-caps text-secondary mb-2 block tracking-widest">
-                CURATED JOURNEYS
+            <span class="text-xs text-gray-400 tracking-widest uppercase">
+                Curated Journeys
             </span>
-            <h2 class="font-headline-lg text-primary text-2xl md:text-4xl">
+            <h2 class="text-2xl md:text-4xl font-bold text-white mt-1">
                 Featured Destinations
             </h2>
         </div>
 
-        <!-- 🔥 CATEGORY FILTER (UPGRADED UI) -->
+        <!-- FILTER -->
         <div class="flex flex-wrap gap-2">
 
             <a href="{% url 'home' %}"
-               class="px-4 py-1 text-sm rounded-full bg-white/10 text-white backdrop-blur-md hover:bg-white hover:text-black transition">
+               class="px-4 py-1 text-sm rounded-full transition
+               {% if not request.GET.category|default:'' %} bg-white text-black {% else %} bg-white/10 hover:bg-white hover:text-black {% endif %}">
                 All
             </a>
 
-         <a href="?category=story"
-   class="px-4 py-1 text-sm rounded-full bg-blue-100 text-blue-700 hover:bg-blue-500 hover:text-white transition">
-    Story
-</a>
+            <a href="?category=story"
+               class="px-4 py-1 text-sm rounded-full transition
+               {% if request.GET.category|default:'' == 'story' %} bg-blue-500 text-white {% else %} bg-white/10 hover:bg-blue-500 hover:text-white {% endif %}">
+                Story
+            </a>
 
-<a href="?category=guide"
-   class="px-4 py-1 text-sm rounded-full bg-green-100 text-green-700 hover:bg-green-500 hover:text-white transition">
-    Guide
-</a>
+            <a href="?category=guide"
+               class="px-4 py-1 text-sm rounded-full transition
+               {% if request.GET.category|default:'' == 'guide' %} bg-green-500 text-white {% else %} bg-white/10 hover:bg-green-500 hover:text-white {% endif %}">
+                Guide
+            </a>
 
-<a href="?category=experience"
-   class="px-4 py-1 text-sm rounded-full bg-pink-100 text-pink-700 hover:bg-pink-500 hover:text-white transition">
-    Experience
-</a>
+            <a href="?category=experience"
+               class="px-4 py-1 text-sm rounded-full transition
+               {% if request.GET.category|default:'' == 'experience' %} bg-pink-500 text-white {% else %} bg-white/10 hover:bg-pink-500 hover:text-white {% endif %}">
+                Experience
+            </a>
 
         </div>
 
     </div>
 
-    <!-- 🎬 NETFLIX STYLE GRID -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- GRID -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
 
         {% for post in posts %}
 
-        <div class="group relative cursor-pointer overflow-hidden rounded-xl shadow-lg bg-black">
+        <!-- FULL CARD CLICKABLE -->
+        <a href="{% url 'cart1' post.id %}"
+           class="group relative block cursor-pointer overflow-hidden rounded-2xl bg-white/5 backdrop-blur hover:shadow-2xl hover:-translate-y-2 transition duration-300">
 
             <!-- IMAGE -->
-            <div class="w-full h-[320px] md:h-[360px] overflow-hidden">
+            <div class="relative w-full h-[320px] md:h-[360px] overflow-hidden">
 
                 {% if post.picture %}
                 <img src="{{ post.picture.url }}"
-                    class="w-full h-full object-cover transform group-hover:scale-110 transition duration-700 ease-in-out">
+                    class="w-full h-full object-cover transform group-hover:scale-110 group-hover:brightness-110 transition duration-700">
                 {% else %}
                 <img src="https://via.placeholder.com/600x800"
                     class="w-full h-full object-cover">
                 {% endif %}
 
-                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
 
             </div>
 
-            <!-- TEXT -->
-            <div class="absolute bottom-0 left-0 right-0 p-4 text-white">
+            <!-- CONTENT -->
+            <div class="absolute bottom-0 left-0 right-0 p-5">
 
-                <!-- CATEGORY TAG -->
                 <span class="text-xs uppercase tracking-widest text-gray-300">
                     {{ post.category }}
                 </span>
 
-                <h3 class="text-lg md:text-xl font-bold mt-1 line-clamp-2">
+                <h3 class="text-lg md:text-xl font-semibold mt-1 line-clamp-2">
                     {{ post.title }}
                 </h3>
 
@@ -93,28 +125,49 @@
                     {{ post.description|truncatewords:10 }}
                 </p>
 
-                <a href="{% url 'cart1' post.id %}"
-                   class="inline-flex items-center gap-2 mt-3 text-xs font-semibold text-white bg-white/10 px-3 py-1 rounded-full backdrop-blur-md hover:bg-white hover:text-black transition">
-                    Explore Guide →
-                </a>
+                <!-- FOOTER -->
+                <div class="flex items-center justify-between mt-4">
+
+                    <span class="text-xs text-gray-300">
+                        ❤️ {{ post.total_likes }} • 5 min read
+                    </span>
+
+                    <span
+                       class="text-xs font-medium text-white bg-white/10 px-3 py-1 rounded-full group-hover:bg-white group-hover:text-black transition">
+                        Explore →
+                    </span>
+
+                </div>
 
             </div>
 
-        </div>
+        </a>
 
         {% empty %}
 
-        <!-- NO DATA -->
-        <p class="text-white text-center col-span-3">
-            No posts found in this category.
-        </p>
+        <!-- EMPTY STATE -->
+        <div class="col-span-full text-center py-20">
+            <h3 class="text-xl font-semibold text-white">No posts found</h3>
+            <p class="text-gray-400 mt-2">Try another category or start sharing your journey 🚀</p>
+            <a href="{% url 'create_post' %}"
+               class="inline-block mt-4 px-5 py-2 bg-white text-black rounded-full text-sm hover:scale-105 transition">
+                Create Post
+            </a>
+        </div>
 
         {% endfor %}
 
+    </div>
+
+    <!-- LOAD MORE -->
+    <div class="text-center mt-12">
+        <button class="px-6 py-2 bg-white/10 rounded-full hover:bg-white hover:text-black transition">
+            Load More
+        </button>
     </div>
 
 </section>
 
 </main>
 
-{% endblock base %}
+{% endblock %}

@@ -1,141 +1,143 @@
 {% extends 'header_footer.html' %}
-
 {% block base %}
-<main class="pt-16 md:pt-20">
 
-<!-- HERO -->
-<section class="relative h-[50vh] sm:h-[60vh] md:h-[80vh] lg:h-[921px] w-full overflow-hidden">
-    <img class="w-full h-full object-cover"
-        src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80"/>
+<main class="bg-white text-black">
 
-    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-end px-4 sm:px-8 md:px-12 lg:px-20 py-6 md:py-10">
+<!-- ================= HERO (ELITE EDITORIAL UX) ================= -->
+<section class="relative h-[70vh] md:h-[90vh] w-full overflow-hidden">
 
-        <div class="max-w-4xl">
-            <span class="text-white/70 mb-2 block text-[10px] sm:text-xs md:text-sm tracking-widest">
-                JOURNEY • SWAT VALLEY
+    <img
+        class="absolute inset-0 w-full h-full object-cover scale-105"
+        src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80"
+        alt="Travel Story"
+    />
+
+    <!-- LAYER SYSTEM -->
+    <div class="absolute inset-0 bg-black/50"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+
+    <!-- CONTENT -->
+    <div class="absolute bottom-0 left-0 right-0 px-6 md:px-16 lg:px-24 pb-14">
+
+        <div class="max-w-3xl">
+
+            <span class="text-white/70 text-[10px] md:text-xs tracking-[0.3em] uppercase">
+                Journey • Swat Valley
             </span>
 
-            <h1 class="text-xl sm:text-2xl md:text-4xl lg:text-5xl text-white font-bold mb-4 leading-snug">
+            <h1 class="text-3xl md:text-5xl font-bold text-white mt-3 leading-tight">
                 Where the Emerald River Whispers to the Peaks
             </h1>
 
-            <div class="flex flex-wrap items-center gap-2 sm:gap-3 text-white/80 text-xs sm:text-sm">
+            <p class="text-white/70 mt-5 text-sm md:text-base leading-relaxed max-w-2xl">
+                A cinematic journey through Pakistan’s northern paradise — where rivers carve silence into mountains.
+            </p>
+
+            <div class="flex flex-wrap gap-4 text-white/50 text-xs mt-5">
                 <span>By Zephyrine Khan</span>
-                <span class="w-1 h-1 rounded-full bg-white/60 hidden sm:block"></span>
-                <span>12 Min Read</span>
+                <span>•</span>
+                <span>12 min read</span>
+                <span>•</span>
+                <span>Pakistan</span>
             </div>
+
         </div>
 
     </div>
 </section>
 
-<!-- ARTICLE -->
-<article class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 md:mt-16">
+<!-- ================= ARTICLE (PERFECT READING UX) ================= -->
+<article class="max-w-2xl mx-auto px-6 md:px-0 mt-14 md:mt-24">
 
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
-
-<!-- SIDEBAR -->
-<aside class="lg:col-span-3 hidden lg:block border-l pl-6">
-    <div class="sticky top-28 space-y-10">
-
-        <div>
-            <p class="text-sm mb-4 font-semibold">SHARE THIS STORY</p>
-            <div class="flex flex-col gap-3 text-sm">
-                <a class="hover:text-primary" href="#">Share</a>
-                <a class="hover:text-primary" href="#">Copy Link</a>
-            </div>
-        </div>
-
-        <div>
-            <p class="text-sm mb-4 font-semibold">TOPICS</p>
-            <div class="flex flex-wrap gap-2">
-                <span class="bg-gray-100 px-3 py-1 text-xs rounded-full">Trekking</span>
-                <span class="bg-gray-100 px-3 py-1 text-xs rounded-full">Culture</span>
-                <span class="bg-gray-100 px-3 py-1 text-xs rounded-full">Pakistan</span>
-            </div>
-        </div>
-
-    </div>
-</aside>
-
-<!-- CONTENT -->
-<div class="lg:col-span-7 lg:col-start-5">
-
-    <p class="text-base md:text-lg mb-5 md:mb-6 leading-relaxed">
+    <p class="text-lg md:text-xl leading-relaxed text-gray-900 font-medium">
         In the northern reaches of Pakistan, the Swat Valley unfolds like a masterpiece of rivers, forests, and mountains.
     </p>
 
-    <p class="text-gray-600 mb-6 md:mb-8 leading-relaxed text-sm md:text-base">
-        The journey begins in Saidu Sharif, where the air grows crisp and peaceful.
+    <p class="mt-8 text-gray-600 leading-relaxed text-base md:text-lg">
+        The journey begins in Saidu Sharif, where the air grows crisp and peaceful. As the road winds upward, landscapes slowly transform into cinematic views.
     </p>
 
-    <!-- GALLERY -->
-    <div class="grid grid-cols-2 gap-2 sm:gap-3 my-8 md:my-10 h-[220px] sm:h-[300px] md:h-[500px] lg:h-[600px]">
+    <!-- QUOTE (ELITE STYLE) -->
+    <div class="my-10 border-l-4 border-black pl-5">
+        <p class="italic text-gray-700 text-lg">
+            “Travel is not about places, it’s about transformation.”
+        </p>
+    </div>
 
-        <div class="col-span-1 row-span-2 overflow-hidden rounded-lg">
-            <img class="w-full h-full object-cover"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDarJEMb0IvP92inDVBr0nL5GJSQdvJRNMtz6SGFkmOQ9wbsRVg9GDt6lwhfBXEO8apxSgV0-22-CQYrK8oZ75h9410gNNw1jt8Vvhn1RWLMSTY3Dhsivf-kxLf0e0b0cxdYTUvu2OmFj_a1NimMkTa9HAOJXV9XrmcLe3jDFOqAqEV23ubjX_kmn5JUVKbmAau1b3SNcfPraxTsDirqQ0YTep37k11lgy-i3eVc9_4xTPAqg65FWe71nNoGKEWD_mydb1puAorubgC"/>
+    <p class="text-gray-600 leading-relaxed text-base md:text-lg">
+        Every turn reveals waterfalls, wooden villages, and the silent strength of the mountains.
+    </p>
+
+</article>
+
+<!-- ================= GALLERY (FOCUS FLOW UX) ================= -->
+<section class="max-w-4xl mx-auto px-6 mt-16 md:mt-24">
+
+    <div class="grid grid-cols-2 gap-3 md:gap-5 h-[320px] md:h-[520px]">
+
+        <div class="row-span-2 overflow-hidden rounded-2xl group">
+            <img class="w-full h-full object-cover group-hover:scale-105 transition duration-700"
+                 src="https://i.pinimg.com/736x/94/3f/db/943fdbd7451ac12eb78d4f2d61ae38ed.jpg">
         </div>
 
-        <div class="overflow-hidden rounded-lg">
-            <img class="w-full h-full object-cover"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJCHOs9E6-fRMXYDV-la-C78F1ADwu_MKJ8KLTrZK8TEQndOkLAtP2YrGgq3quCTopW1VNoi5igtDnwzsKW3tbWl8EpuLSvKn-6YYpoqWC45m8J4ZxlTG9rmi_Jnq-E7k2slPS9nnpJYF-f_UqA-GZfPzmm5FSMp459X0LmaewlSqABYUw_Z_iPmSTxElqOS3xlJOUljTfndZOYUKRZgEP0aSt1XEkqPbE1-MYaQnlGvoMqneVkux498ED-kweEXlY6906jTGaIqaB"/>
+        <div class="overflow-hidden rounded-2xl group">
+            <img class="w-full h-full object-cover group-hover:scale-105 transition duration-700"
+                 src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=800&q=80">
         </div>
 
-        <div class="overflow-hidden rounded-lg">
-            <img class="w-full h-full object-cover"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfEnjZr3tyI82Ch-kqLXxu0G6pJ8AVdSGnIDWLQlpbnuxVny62eMeMG1eQ7NntSmV_Tp77DSyZVW-TQ3fQR1zMmVELxZwFi4kgEuf7VGrBYN5fFf0fsjvgCN5cXBI44sDqd_nDv6sWu5ezP-3rM_pv6_lrRPwTvYSrwdr049rh5_zoeP0owrn7iIBbbV4egVWkQYDgxRm8XgpuPd-Gdicfo3Q708xWQfe9Ss0QHfT8pHEtxqW1LDq6207Nh35K1xSgJCsbAdGkh3YH"/>
+        <div class="overflow-hidden rounded-2xl group">
+            <img class="w-full h-full object-cover group-hover:scale-105 transition duration-700"
+                 src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=800&q=80">
         </div>
 
     </div>
 
-</div>
-</div>
-</article>
+</section>
 
-<!-- RELATED (NETFLIX STYLE RESPONSIVE) -->
-<section class="mt-16 md:mt-20 py-10 md:py-16 bg-gray-50">
+<!-- ================= RELATED (OPTIONAL CLEAN UX) ================= -->
+<section class="mt-24 bg-gray-50 py-16">
 
-<div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="max-w-6xl mx-auto px-6">
 
-    <h2 class="text-xl sm:text-2xl md:text-3xl mb-6 md:mb-10 font-bold">
-        Related Adventures
+    <h2 class="text-2xl md:text-3xl font-bold mb-10">
+        More Stories Like This
     </h2>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
 
         {% for post in posts %}
 
-        <div class="group relative rounded-xl overflow-hidden shadow-lg bg-black">
+        <a href="{% url 'cart1' post.id %}"
+           class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition">
 
-            <div class="w-full h-[260px] sm:h-[320px] md:h-[360px] overflow-hidden relative">
+            <div class="h-56 overflow-hidden relative">
 
                 {% if post.picture %}
                 <img src="{{ post.picture.url }}"
                      class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
-                {% else %}
-                <img src="https://via.placeholder.com/500x700"
-                     class="w-full h-full object-cover">
                 {% endif %}
 
-                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
 
             </div>
 
-            <div class="absolute bottom-0 left-0 right-0 p-3 sm:p-4">
+            <div class="p-5">
 
-                <h3 class="text-white font-bold text-sm sm:text-lg md:text-xl mb-2 line-clamp-2">
+                <h3 class="font-semibold text-lg line-clamp-2">
                     {{ post.title }}
                 </h3>
 
-                <a href="{% url 'cart1' post.id %}"
-                   class="inline-flex items-center gap-2 text-xs font-semibold text-white bg-white/10 px-3 py-1 rounded-full backdrop-blur-md hover:bg-white hover:text-black transition">
-                    Explore Guide →
-                </a>
+                <p class="text-sm text-gray-500 mt-2 line-clamp-2">
+                    {{ post.description|truncatewords:12 }}
+                </p>
+
+                <span class="inline-block mt-4 text-xs bg-black text-white px-4 py-2 rounded-full">
+                    Read →
+                </span>
 
             </div>
 
-        </div>
+        </a>
 
         {% endfor %}
 
@@ -146,4 +148,5 @@
 </section>
 
 </main>
-{% endblock base %}
+
+{% endblock %}

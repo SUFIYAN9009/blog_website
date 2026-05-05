@@ -1,0 +1,95 @@
+{% extends 'header_footer.html' %}
+{% block base %}
+
+<main class="pt-20 bg-gray-50 min-h-screen">
+
+<section class="max-w-6xl mx-auto px-4 py-12 grid md:grid-cols-2 gap-10">
+
+    <!-- LEFT: GUIDE DETAILS -->
+    <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+
+        {% if guide.image %}
+        <img src="{{ guide.image.url }}" class="w-full h-80 object-cover">
+        {% else %}
+        <img src="https://via.placeholder.com/600x400" class="w-full h-80 object-cover">
+        {% endif %}
+
+        <div class="p-6">
+
+            <span class="text-xs text-emerald-600 uppercase tracking-widest">
+                {{ guide.get_specialty_display }}
+            </span>
+
+            <h2 class="text-2xl font-bold mt-2">
+                {{ guide.name }}
+            </h2>
+
+            <p class="text-gray-600 mt-3">
+                {{ guide.bio }}
+            </p>
+
+            <div class="flex justify-between mt-6 text-sm">
+
+                <div>
+                    <p class="text-gray-500">Experience</p>
+                    <p class="font-semibold text-black">{{ guide.experience }} Years</p>
+                </div>
+
+                <div>
+                    <p class="text-gray-500">Location</p>
+                    <p class="font-semibold text-black">{{ guide.get_location_display }}</p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- RIGHT: BOOKING FORM -->
+    <div class="bg-white rounded-2xl shadow-lg p-8">
+
+        <h1 class="text-2xl font-bold mb-6">
+            Book This Guide
+        </h1>
+
+        <form method="POST" class="space-y-5">
+            {% csrf_token %}
+
+            <!-- DATE -->
+            <div>
+                <label class="block text-sm font-medium mb-1">
+                    Select Date
+                </label>
+                <input type="date"
+                       name="date"
+                       required
+                       class="w-full border rounded-xl px-4 py-3 focus:ring-2 focus:ring-emerald-600 outline-none">
+            </div>
+
+            <!-- OPTIONAL MESSAGE -->
+            <div>
+                <label class="block text-sm font-medium mb-1">
+                    Message (Optional)
+                </label>
+                <textarea name="message"
+                          rows="3"
+                          placeholder="Any special request..."
+                          class="w-full border rounded-xl px-4 py-3 focus:ring-2 focus:ring-emerald-600 outline-none"></textarea>
+            </div>
+
+            <!-- BUTTON -->
+            <button type="submit"
+                    class="w-full bg-emerald-700 text-white py-3 rounded-xl text-sm font-semibold hover:bg-emerald-800 transition">
+                Confirm Booking
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+</main>
+
+{% endblock %}

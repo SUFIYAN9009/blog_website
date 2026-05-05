@@ -1,6 +1,8 @@
 from urllib import request
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import TravelPost, Comment
+
+
+from .models import TravelPost, Comment, Guide, Booking
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
@@ -31,13 +33,42 @@ def stories(request):
 
 # ---------------- GUIDES ----------------
 def guides(request):
-    return render(request, 'guides.html')
+    guides_qs = Guide.objects.all()
 
+    search = request.GET.get('search', '')
+    specialty = request.GET.get('specialty', '')
+    region = request.GET.get('region', '')
+
+    if search:
+        guides_qs = guides_qs.filter(name__icontains=search)
+
+    if specialty:
+        guides_qs = guides_qs.filter(specialty=specialty)
+
+    if region:
+        guides_qs = guides_qs.filter(location=region)
+
+
+    return render(request, 'guides.html', {
+        'guides': guides_qs,
+        'search': search,
+        'specialty': specialty,
+        'region': region,
+    })
+
+
+
+def guide_detail(request, id):
+    guide = Guide.objects.get(id=id)
+    return render(request, 'guide_detail.html', {'guide': guide})
 
 # ---------------- CART / DETAIL PAGE ----------------
 def cart_image(request, id):
     post = get_object_or_404(TravelPost, id=id)
-    return render(request, 'cart.html', {'post': post})
+
+    return render(request, 'cart.html', {
+        'post': post
+    })
 
 
 # ---------------- SIGNUP ----------------
@@ -113,3 +144,40 @@ def like_post(request, id):
 
 def about(request):
     return render(request, 'about.html')
+
+
+
+@login_required(login_url='login')
+def book_guide(request, guide_id):
+    guide = get_object_or_404(Guide, id=guide_id)
+
+    if request.method == "POST":
+        date = request.POST.get("date")
+
+        Booking.objects.create(
+            user=request.user,
+            guide=guide,
+            date=date
+        )
+
+        return redirect('my_bookings')
+
+    return render(request, 'book_guide.html', {'guide': guide})
+
+
+@login_required(login_url='login')
+def my_bookings(request):
+   bookings = Booking.objects.filter(user=request.user).order_by('-created_at')
+   return render(request, 'my_bookings.html', {'bookings': bookings})
+
+def guide_detail(request, id):
+    guide = Guide.objects.get(id=id)
+    return render(request, 'guide_detail.html', {'guide': guide})
+
+
+
+
+
+
+
+
