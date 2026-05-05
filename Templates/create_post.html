@@ -2,40 +2,64 @@
 
 {% block base %}
 
-<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-800 px-4">
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-950 via-black to-gray-900 px-4 py-10">
 
+    <!-- CARD -->
     <form method="POST" enctype="multipart/form-data"
-          class="w-full max-w-md bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-8 text-white shadow-2xl">
+          class="w-full max-w-lg bg-white/5 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 md:p-10 text-white shadow-2xl hover:shadow-emerald-500/10 transition">
 
         {% csrf_token %}
 
-        <h2 class="text-2xl font-bold mb-6 text-center">Create New Post</h2>
+        <!-- HEADER -->
+        <div class="text-center mb-8">
+            <h2 class="text-3xl font-bold">Create New Story</h2>
+            <p class="text-gray-400 text-sm mt-2">
+                Share your travel experience with the world 🌍
+            </p>
+        </div>
 
         <!-- TITLE -->
-        <input type="text" name="title" placeholder="Title"
-               class="w-full mb-4 p-2 rounded bg-black/30 border border-white/20 focus:outline-none">
+        <div class="mb-5">
+            <label class="text-xs text-gray-400 uppercase tracking-widest">Title</label>
+            <input type="text" name="title" placeholder="Enter your story title"
+                   class="w-full mt-2 p-3 rounded-xl bg-black/40 border border-white/10 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/30 outline-none transition">
+        </div>
 
         <!-- DESCRIPTION -->
-        <textarea name="description" placeholder="Description"
-                  class="w-full mb-4 p-2 rounded bg-black/30 border border-white/20 focus:outline-none"></textarea>
+        <div class="mb-5">
+            <label class="text-xs text-gray-400 uppercase tracking-widest">Description</label>
+            <textarea name="description" rows="4" placeholder="Write your travel experience..."
+                      class="w-full mt-2 p-3 rounded-xl bg-black/40 border border-white/10 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/30 outline-none transition resize-none"></textarea>
+        </div>
 
         <!-- CATEGORY -->
-        <select name="category"
-                class="w-full mb-4 p-2 rounded bg-black/30 border border-white/20">
-            <option value="story">Story</option>
-            <option value="guide">Guide</option>
-            <option value="experience">Experience</option>
-        </select>
+        <div class="mb-5">
+            <label class="text-xs text-gray-400 uppercase tracking-widest">Category</label>
+            <select name="category"
+                    class="w-full mt-2 p-3 rounded-xl bg-black/40 border border-white/10 focus:border-emerald-500 outline-none transition">
+                <option value="story">Story</option>
+                <option value="guide">Guide</option>
+                <option value="experience">Experience</option>
+            </select>
+        </div>
 
         <!-- IMAGE -->
-        <input type="file" name="picture"
-               class="w-full mb-4 text-sm text-gray-300">
+        <div class="mb-6">
+            <label class="text-xs text-gray-400 uppercase tracking-widest">Upload Image</label>
+            <input type="file" name="picture"
+                   class="w-full mt-2 text-sm text-gray-300 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:bg-emerald-600 file:text-white hover:file:bg-emerald-700 transition">
+        </div>
 
         <!-- BUTTON -->
         <button type="submit"
-                class="w-full bg-green-500 py-2 rounded hover:bg-green-600 transition">
-            Publish
+                class="w-full bg-emerald-600 hover:bg-emerald-700 py-3 rounded-xl font-semibold text-white transition shadow-lg hover:shadow-emerald-500/30">
+            Publish Story
         </button>
+
+        <!-- FOOTER TEXT -->
+        <p class="text-center text-xs text-gray-500 mt-6">
+            Your story will be visible to travelers worldwide 🌍
+        </p>
 
     </form>
 

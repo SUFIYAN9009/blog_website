@@ -1,23 +1,22 @@
 {% extends 'header_footer.html' %}
 {% block base %}
 
-<main class="pt-16 md:pt-20 bg-white text-black">
+<main class="bg-white text-black">
 
-<!-- ================= HERO (PRO FIXED CINEMATIC) ================= -->
+<!-- ================= HERO (SYSTEM LEVEL DESIGN) ================= -->
 <section class="relative min-h-[75vh] md:min-h-[92vh] flex items-center overflow-hidden">
 
-    <!-- BACKGROUND IMAGE (FIXED PRO STYLE - NO CROPPING ISSUE) -->
-    <div class="absolute inset-0">
+    <!-- BACKGROUND IMAGE (CLEAN + CONTROLLED) -->
+    <div class="absolute inset-0 scale-105">
         <img
-            src="https://i.pinimg.com/736x/38/2d/94/382d94d3196007372afdbe92e575f95b.jpg"
-            class="w-full h-full object-cover object-center scale-105"
-            alt="K2 Mountains"
+            src="https://images.unsplash.com/photo-1605540436563-5bca919ae766?auto=format&fit=crop&w=3000&q=80"
+            class="w-full h-full object-cover object-[50%_40%]"
+            alt="K2 Base Camp"
         />
     </div>
 
-    <!-- CINEMATIC OVERLAY (PRO DEPTH SYSTEM) -->
-    <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/65 to-black/35"></div>
-    <div class="absolute inset-0 bg-black/20"></div>
+    <!-- UNIFIED DARK OVERLAY SYSTEM -->
+    <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-black/30"></div>
 
     <!-- HERO CONTENT -->
     <div class="relative z-10 px-6 md:px-20 max-w-3xl text-white">
@@ -27,23 +26,31 @@
         </span>
 
         <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mt-4 leading-tight">
-            Discover K2 & The World’s Wildest Peaks
+            Explore <span class="text-emerald-400">K2 Base Camp</span> & Himalayan Peaks
         </h1>
 
-        <p class="mt-5 text-white/80 text-sm md:text-lg leading-relaxed">
-            Connect with certified local guides from Skardu, Hunza & Baltistan.
-            Experience safe, authentic Himalayan expeditions.
+        <p class="mt-5 text-white/80 text-sm md:text-lg leading-relaxed max-w-xl">
+            Connect with certified mountain guides from Skardu, Hunza & Baltistan.
+            Experience safe, premium Himalayan expeditions.
         </p>
 
+        <!-- STATS -->
+        <div class="mt-6 flex gap-6 text-xs text-white/60 flex-wrap">
+            <span>🔥 100+ Expeditions</span>
+            <span>🏔️ Certified Guides</span>
+            <span>⭐ 4.9 Rating</span>
+        </div>
+
+        <!-- CTA (SYSTEM BUTTON STYLE) -->
         <div class="mt-8 flex flex-wrap gap-3">
 
             <a href="#guides"
-               class="bg-emerald-600 hover:bg-emerald-700 px-6 py-3 rounded-xl text-sm font-semibold transition shadow-lg">
+               class="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 rounded-xl text-sm font-semibold transition shadow-md">
                 Explore Guides
             </a>
 
             <a href="{% url 'my_bookings' %}"
-               class="border border-white/30 px-6 py-3 rounded-xl text-sm hover:bg-white/10 transition">
+               class="px-6 py-3 border border-white/30 text-white rounded-xl text-sm hover:bg-white hover:text-black transition">
                 My Bookings
             </a>
 
@@ -53,85 +60,96 @@
 </section>
 
 
-<!-- ================= GUIDES GRID ================= -->
+<!-- ================= GUIDES SECTION ================= -->
 <section id="guides" class="max-w-screen-2xl mx-auto px-4 py-16">
 
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-
-{% for guide in guides %}
-
-<div class="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition duration-300 overflow-hidden">
-
-    <!-- IMAGE -->
-    <a href="{% url 'guide_detail' guide.id %}">
-        <div class="relative aspect-[4/5] overflow-hidden bg-gray-100">
-
-            {% if guide.image %}
-            <img src="{{ guide.image.url }}"
-                 class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
-            {% else %}
-            <img src="https://via.placeholder.com/500x700"
-                 class="w-full h-full object-cover">
-            {% endif %}
-
-            <!-- OVERLAY -->
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10"></div>
-
-            <!-- BADGE -->
-            <div class="absolute top-4 left-4 bg-black/60 backdrop-blur text-white text-xs px-3 py-1 rounded-full">
-                Verified Guide
-            </div>
-
-        </div>
-    </a>
-
-    <!-- CONTENT -->
-    <div class="p-6">
-
-        <h3 class="text-xl font-bold text-gray-900 group-hover:text-emerald-700 transition">
-            {{ guide.name }}
-        </h3>
-
-        <p class="text-sm text-gray-500 mt-1">
-            📍 {{ guide.get_location_display }}
-        </p>
-
-        <div class="flex justify-between text-sm text-gray-500 mt-4 border-t pt-4">
-
-            <div>
-                <p class="text-xs uppercase">Experience</p>
-                <p class="font-semibold text-black">{{ guide.experience }} yrs</p>
-            </div>
-
-            <div class="text-right">
-                <p class="text-xs uppercase">Location</p>
-                <p class="font-semibold text-black">{{ guide.get_location_display }}</p>
-            </div>
-
-        </div>
-
-        <!-- CTA -->
-        <div class="mt-5 grid grid-cols-2 gap-2">
-
-            <a href="{% url 'guide_detail' guide.id %}"
-               class="text-center border rounded-xl py-2 text-sm hover:bg-gray-50 transition">
-                Details
-            </a>
-
-            <a href="{% url 'book_guide' guide.id %}"
-               class="text-center bg-emerald-700 hover:bg-emerald-800 text-white py-2 rounded-xl text-sm font-semibold transition shadow-md">
-                Book
-            </a>
-
-        </div>
-
+    <!-- HEADER -->
+    <div class="mb-10">
+        <span class="text-xs text-gray-400 uppercase tracking-widest">
+            Trusted Local Experts
+        </span>
+        <h2 class="text-2xl md:text-4xl font-bold mt-1">
+            Meet Our Certified Guides
+        </h2>
     </div>
 
-</div>
+    <!-- GRID -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
 
-{% endfor %}
+        {% for guide in guides %}
 
-</div>
+        <!-- CARD (UNIFIED DESIGN SYSTEM) -->
+        <div class="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition overflow-hidden">
+
+            <a href="{% url 'guide_detail' guide.id %}">
+                <div class="relative aspect-[4/5] overflow-hidden">
+
+                    {% if guide.image %}
+                    <img src="{{ guide.image.url }}"
+                         class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    {% else %}
+                    <img src="https://via.placeholder.com/500x700"
+                         class="w-full h-full object-cover">
+                    {% endif %}
+
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10"></div>
+
+                    <!-- BADGE -->
+                    <div class="absolute top-4 left-4 bg-black/60 text-white text-xs px-3 py-1 rounded-full backdrop-blur">
+                        Verified Guide
+                    </div>
+
+                </div>
+            </a>
+
+            <!-- CONTENT -->
+            <div class="p-6">
+
+                <h3 class="text-xl font-bold group-hover:text-emerald-700 transition">
+                    {{ guide.name }}
+                </h3>
+
+                <p class="text-sm text-gray-500 mt-1">
+                    📍 {{ guide.get_location_display }}
+                </p>
+
+                <!-- INFO -->
+                <div class="flex justify-between text-sm text-gray-500 mt-4 border-t pt-4">
+
+                    <div>
+                        <p class="text-xs uppercase">Experience</p>
+                        <p class="font-semibold text-black">{{ guide.experience }} yrs</p>
+                    </div>
+
+                    <div class="text-right">
+                        <p class="text-xs uppercase">Location</p>
+                        <p class="font-semibold text-black">{{ guide.get_location_display }}</p>
+                    </div>
+
+                </div>
+
+                <!-- CTA -->
+                <div class="mt-5 grid grid-cols-2 gap-2">
+
+                    <a href="{% url 'guide_detail' guide.id %}"
+                       class="text-center border rounded-xl py-2 text-sm hover:bg-gray-50 transition">
+                        Details
+                    </a>
+
+                    <a href="{% url 'book_guide' guide.id %}"
+                       class="text-center bg-emerald-700 hover:bg-emerald-800 text-white py-2 rounded-xl text-sm font-semibold transition shadow-md">
+                        Book
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
 
 </section>
 

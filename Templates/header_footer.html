@@ -18,43 +18,46 @@
 </style>
 </head>
 
-<body class="bg-white text-black">
+<body class="bg-white text-black font-[Be_Vietnam_Pro]">
 
-<!-- ================= HEADER ================= -->
-<header class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b">
+<!-- ================= HEADER (UPGRADED PRO NAVBAR) ================= -->
+<header class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-xl border-b border-gray-100 shadow-sm">
 
 <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
 
 <div class="flex justify-between items-center h-16 sm:h-20">
 
     <!-- LOGO -->
-    <div class="text-lg sm:text-xl font-bold text-emerald-900">
+    <div class="text-lg sm:text-xl font-bold text-emerald-900 tracking-tight">
         PakAdventure
     </div>
 
     <!-- DESKTOP NAV -->
-    <nav class="hidden md:flex items-center gap-6 text-sm">
-        <a href="{% url 'home' %}" class="hover:text-emerald-700">Destinations</a>
-        <a href="{% url 'stories1' %}" class="hover:text-emerald-700">Stories</a>
-        <a href="{% url 'guides' %}" class="hover:text-emerald-700">Guides</a>
-      
+    <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-700">
+
+        <a href="{% url 'home' %}" class="hover:text-emerald-700 transition">Destinations</a>
+        <a href="{% url 'stories1' %}" class="hover:text-emerald-700 transition">Stories</a>
+        <a href="{% url 'guides' %}" class="hover:text-emerald-700 transition">Guides</a>
+        <a href="{% url 'about' %}" class="hover:text-emerald-700 transition">About</a>
+
     </nav>
 
     <!-- ACTIONS -->
     <div class="flex items-center gap-3">
 
-        <a href="{% url 'signup' %}" class="hidden sm:block text-sm hover:text-emerald-700">
+        <a href="{% url 'signup' %}"
+           class="hidden sm:block text-sm text-gray-700 hover:text-emerald-700 transition">
             Sign In
         </a>
-        
-        <button class="bg-emerald-700 text-white px-4 sm:px-6 py-2 rounded-lg text-xs sm:text-sm">
-            <a href="{% url 'guides' %}" class="bg-emerald-700 text-white px-4 py-2 rounded-lg">
-    Book Guide
-</a>
-        </button>
 
-        <!-- MOBILE BUTTON -->
-        <button id="menuBtn" class="md:hidden text-2xl">
+        <!-- FIXED BUTTON (NO NESTED A TAG ❌) -->
+        <a href="{% url 'guides' %}"
+           class="bg-emerald-700 hover:bg-emerald-800 text-white px-4 sm:px-5 py-2 rounded-lg text-xs sm:text-sm transition shadow-md">
+            Book Guide
+        </a>
+
+        <!-- MOBILE MENU BUTTON -->
+        <button id="menuBtn" class="md:hidden text-2xl text-gray-800">
             <span class="material-symbols-outlined">menu</span>
         </button>
 
@@ -64,14 +67,15 @@
 
 </div>
 
-<!-- MOBILE MENU -->
-<div id="mobileMenu" class="hidden md:hidden border-t bg-white px-4 py-4 space-y-3 text-sm">
+<!-- ================= MOBILE MENU ================= -->
+<div id="mobileMenu"
+     class="hidden md:hidden border-t bg-white px-4 py-5 space-y-3 text-sm shadow-md">
 
     <a href="{% url 'home' %}" class="block hover:text-emerald-700">Destinations</a>
     <a href="{% url 'stories1' %}" class="block hover:text-emerald-700">Stories</a>
     <a href="{% url 'guides' %}" class="block hover:text-emerald-700">Guides</a>
     <a href="{% url 'about' %}" class="block hover:text-emerald-700">About</a>
-    <a href="{% url 'signup' %}" class="block text-emerald-700">Sign In</a>
+    <a href="{% url 'signup' %}" class="block text-emerald-700 font-medium">Sign In</a>
 
 </div>
 
@@ -83,20 +87,20 @@
 {% endblock base %}
 </main>
 
-<!-- ================= FOOTER ================= -->
-<footer class="bg-gray-50 border-t mt-20 py-12">
+<!-- ================= FOOTER (CLEAN PRO VERSION) ================= -->
+<footer class="bg-gray-50 border-t mt-24 py-14">
 
-<div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+<div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
 
     <div>
-        <h2 class="font-bold text-lg mb-3">PakAdventure</h2>
-        <p class="text-sm text-gray-600">
-            Explore Pakistan’s mountains, culture, and hidden beauty.
+        <h2 class="font-bold text-lg mb-3 text-emerald-900">PakAdventure</h2>
+        <p class="text-sm text-gray-600 leading-relaxed">
+            Explore Pakistan’s mountains, culture, and hidden beauty with real local experiences.
         </p>
     </div>
 
     <div>
-        <h3 class="font-bold mb-3">Explore</h3>
+        <h3 class="font-semibold mb-3">Explore</h3>
         <ul class="space-y-2 text-sm text-gray-600">
             <li><a href="{% url 'home' %}" class="hover:text-emerald-700">Destinations</a></li>
             <li><a href="{% url 'stories1' %}" class="hover:text-emerald-700">Stories</a></li>
@@ -105,7 +109,7 @@
     </div>
 
     <div>
-        <h3 class="font-bold mb-3">Company</h3>
+        <h3 class="font-semibold mb-3">Company</h3>
         <ul class="space-y-2 text-sm text-gray-600">
             <li><a href="{% url 'about' %}" class="hover:text-emerald-700">About</a></li>
             <li><a href="#" class="hover:text-emerald-700">Contact</a></li>
@@ -113,16 +117,19 @@
     </div>
 
     <div>
-        <h3 class="font-bold mb-3">Newsletter</h3>
-        <input class="w-full border p-2 text-sm rounded" placeholder="Enter email"/>
-        <button class="mt-2 w-full bg-emerald-700 text-white py-2 rounded text-sm">
+        <h3 class="font-semibold mb-3">Newsletter</h3>
+
+        <input class="w-full border border-gray-200 p-2 text-sm rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none"
+               placeholder="Enter email"/>
+
+        <button class="mt-2 w-full bg-emerald-700 hover:bg-emerald-800 text-white py-2 rounded-lg text-sm transition">
             Subscribe
         </button>
     </div>
 
 </div>
 
-<div class="text-center text-xs text-gray-500 mt-10">
+<div class="text-center text-xs text-gray-500 mt-12">
     © 2026 PakAdventure. All rights reserved.
 </div>
 

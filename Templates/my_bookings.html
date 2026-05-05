@@ -15,14 +15,14 @@
         </p>
     </div>
 
-    <!-- ================= BOOKINGS LIST ================= -->
+    <!-- ================= BOOKINGS ================= -->
     <div class="space-y-6">
 
     {% for booking in bookings %}
 
-        <div class="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 p-5 md:p-6 flex flex-col md:flex-row justify-between gap-6">
+        <div class="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-300 p-5 md:p-6 flex flex-col md:flex-row justify-between gap-6">
 
-            <!-- ================= LEFT SIDE ================= -->
+            <!-- LEFT -->
             <div class="flex items-center gap-5">
 
                 <!-- IMAGE -->
@@ -60,12 +60,13 @@
 
             </div>
 
-            <!-- ================= RIGHT SIDE (STATUS) ================= -->
+            <!-- RIGHT -->
             <div class="flex flex-col justify-between items-start md:items-end">
 
+                <!-- STATUS BADGES (IMPROVED UI) -->
                 {% if booking.status == 'approved' %}
-                    <span class="inline-flex items-center gap-2 px-4 py-1 text-xs font-semibold rounded-full bg-green-50 text-green-700 border border-green-200">
-                        <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                    <span class="inline-flex items-center gap-2 px-4 py-1 text-xs font-semibold rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
+                        <span class="w-2 h-2 bg-emerald-500 rounded-full"></span>
                         Approved
                     </span>
 
@@ -82,13 +83,14 @@
                     </span>
                 {% endif %}
 
-                <p class="text-xs text-gray-400 mt-3 text-right">
-                    Status updated by admin
-                </p>
-
-                <p class="text-xs text-gray-400 mt-1">
-                    Booked on {{ booking.created_at|date:"M d, Y" }}
-                </p>
+                <div class="text-right mt-3">
+                    <p class="text-xs text-gray-400">
+                        Status updated by admin
+                    </p>
+                    <p class="text-xs text-gray-400 mt-1">
+                        Booked on {{ booking.created_at|date:"M d, Y" }}
+                    </p>
+                </div>
 
             </div>
 
@@ -96,7 +98,7 @@
 
     {% empty %}
 
-        <!-- ================= EMPTY STATE ================= -->
+        <!-- ================= EMPTY STATE (UPGRADED) ================= -->
         <div class="text-center py-28 bg-white rounded-2xl border shadow-sm">
 
             <div class="text-6xl mb-4">🧭</div>

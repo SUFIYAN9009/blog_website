@@ -3,18 +3,34 @@
 
 <main class="pt-20 bg-gray-50 min-h-screen">
 
-<section class="max-w-6xl mx-auto px-4 py-12 grid md:grid-cols-2 gap-10">
+<section class="max-w-6xl mx-auto px-4 py-12 grid lg:grid-cols-2 gap-10 items-start">
 
-    <!-- LEFT: GUIDE DETAILS -->
-    <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+    <!-- ================= LEFT: GUIDE CARD ================= -->
+    <div class="bg-white rounded-3xl shadow-lg overflow-hidden border border-gray-100">
 
-        {% if guide.image %}
-        <img src="{{ guide.image.url }}" class="w-full h-80 object-cover">
-        {% else %}
-        <img src="https://via.placeholder.com/600x400" class="w-full h-80 object-cover">
-        {% endif %}
+        <!-- IMAGE (PRO FIXED) -->
+        <div class="relative h-80 overflow-hidden">
 
-        <div class="p-6">
+            {% if guide.image %}
+            <img src="{{ guide.image.url }}"
+                 class="w-full h-full object-cover object-center scale-105 hover:scale-110 transition duration-700">
+            {% else %}
+            <img src="https://via.placeholder.com/600x400"
+                 class="w-full h-full object-cover">
+            {% endif %}
+
+            <!-- overlay -->
+            <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+
+            <!-- badge -->
+            <div class="absolute top-4 left-4 bg-black/60 text-white text-xs px-3 py-1 rounded-full backdrop-blur">
+                Verified Guide
+            </div>
+
+        </div>
+
+        <!-- CONTENT -->
+        <div class="p-7">
 
             <span class="text-xs text-emerald-600 uppercase tracking-widest">
                 {{ guide.get_specialty_display }}
@@ -24,63 +40,81 @@
                 {{ guide.name }}
             </h2>
 
-            <p class="text-gray-600 mt-3">
+            <p class="text-gray-600 mt-4 leading-relaxed">
                 {{ guide.bio }}
             </p>
 
-            <div class="flex justify-between mt-6 text-sm">
+            <!-- INFO GRID -->
+            <div class="grid grid-cols-2 gap-4 mt-6 pt-5 border-t">
 
                 <div>
-                    <p class="text-gray-500">Experience</p>
-                    <p class="font-semibold text-black">{{ guide.experience }} Years</p>
+                    <p class="text-xs text-gray-500 uppercase tracking-wide">Experience</p>
+                    <p class="font-semibold text-black text-lg">{{ guide.experience }} Years</p>
                 </div>
 
                 <div>
-                    <p class="text-gray-500">Location</p>
-                    <p class="font-semibold text-black">{{ guide.get_location_display }}</p>
+                    <p class="text-xs text-gray-500 uppercase tracking-wide">Location</p>
+                    <p class="font-semibold text-black text-lg">{{ guide.get_location_display }}</p>
                 </div>
 
             </div>
 
         </div>
+
     </div>
 
 
-    <!-- RIGHT: BOOKING FORM -->
-    <div class="bg-white rounded-2xl shadow-lg p-8">
+    <!-- ================= RIGHT: BOOKING FORM ================= -->
+    <div class="bg-white rounded-3xl shadow-lg border border-gray-100 p-8">
 
-        <h1 class="text-2xl font-bold mb-6">
-            Book This Guide
+        <h1 class="text-2xl font-bold mb-2">
+            Book Your Guide
         </h1>
 
-        <form method="POST" class="space-y-5">
+        <p class="text-sm text-gray-500 mb-6">
+            Choose your date and confirm your adventure in seconds.
+        </p>
+
+        <form method="POST" class="space-y-6">
             {% csrf_token %}
 
             <!-- DATE -->
             <div>
-                <label class="block text-sm font-medium mb-1">
+                <label class="block text-sm font-medium mb-2 text-gray-700">
                     Select Date
                 </label>
                 <input type="date"
                        name="date"
                        required
-                       class="w-full border rounded-xl px-4 py-3 focus:ring-2 focus:ring-emerald-600 outline-none">
+                       class="w-full border border-gray-200 rounded-xl px-4 py-3
+                              focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600
+                              outline-none transition">
             </div>
 
-            <!-- OPTIONAL MESSAGE -->
+            <!-- MESSAGE -->
             <div>
-                <label class="block text-sm font-medium mb-1">
+                <label class="block text-sm font-medium mb-2 text-gray-700">
                     Message (Optional)
                 </label>
                 <textarea name="message"
-                          rows="3"
+                          rows="4"
                           placeholder="Any special request..."
-                          class="w-full border rounded-xl px-4 py-3 focus:ring-2 focus:ring-emerald-600 outline-none"></textarea>
+                          class="w-full border border-gray-200 rounded-xl px-4 py-3
+                                 focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600
+                                 outline-none transition resize-none"></textarea>
+            </div>
+
+            <!-- SUMMARY BOX -->
+            <div class="bg-gray-50 border rounded-2xl p-4 text-sm text-gray-600">
+                <p class="font-semibold text-black mb-1">Booking Summary</p>
+                <p>Guide: {{ guide.name }}</p>
+                <p>Location: {{ guide.get_location_display }}</p>
             </div>
 
             <!-- BUTTON -->
             <button type="submit"
-                    class="w-full bg-emerald-700 text-white py-3 rounded-xl text-sm font-semibold hover:bg-emerald-800 transition">
+                    class="w-full bg-emerald-700 text-white py-3 rounded-xl text-sm font-semibold
+                           hover:bg-emerald-800 transition shadow-md hover:shadow-lg">
                 Confirm Booking
             </button>
 

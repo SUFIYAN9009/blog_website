@@ -1,57 +1,116 @@
 {% extends 'header_footer.html' %}
 {% block base %}
 
-<main class="pt-20 bg-gray-50 min-h-screen">
+<main class="pt-20 bg-gradient-to-br from-gray-950 via-black to-gray-900 min-h-screen text-white">
 
-<section class="max-w-6xl mx-auto px-4 py-12 grid md:grid-cols-2 gap-10">
+<section class="max-w-6xl mx-auto px-4 py-12 grid lg:grid-cols-5 gap-10">
 
-    <!-- GUIDE IMAGE -->
-    <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+    <!-- ================= LEFT: HERO GUIDE CARD ================= -->
+    <div class="lg:col-span-3">
 
-        {% if guide.image %}
-        <img src="{{ guide.image.url }}" class="w-full h-96 object-cover">
-        {% else %}
-        <img src="https://via.placeholder.com/600x400" class="w-full h-96 object-cover">
-        {% endif %}
+        <div class="rounded-3xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur shadow-2xl">
 
-        <div class="p-6">
+            <!-- IMAGE HERO -->
+            <div class="relative h-[420px] overflow-hidden">
 
-            <h1 class="text-2xl font-bold">
-                {{ guide.name }}
-            </h1>
+                {% if guide.image %}
+                <img src="{{ guide.image.url }}"
+                     class="w-full h-full object-cover scale-105 hover:scale-110 transition duration-700">
+                {% else %}
+                <img src="https://via.placeholder.com/900x600"
+                     class="w-full h-full object-cover">
+                {% endif %}
 
-            <p class="text-emerald-600 text-sm mt-1">
-                {{ guide.get_specialty_display }}
-            </p>
+                <!-- GRADIENT OVERLAY -->
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
 
-            <p class="text-gray-600 mt-4">
-                {{ guide.bio }}
-            </p>
+                <!-- BADGE -->
+                <div class="absolute top-5 left-5 bg-black/60 backdrop-blur px-3 py-1 text-xs rounded-full border border-white/10">
+                    Verified Guide
+                </div>
+
+            </div>
+
+            <!-- CONTENT -->
+            <div class="p-6 md:p-8">
+
+                <h1 class="text-3xl font-bold">
+                    {{ guide.name }}
+                </h1>
+
+                <p class="text-emerald-400 text-sm mt-2">
+                    {{ guide.get_specialty_display }}
+                </p>
+
+                <p class="text-gray-300 mt-5 leading-relaxed">
+                    {{ guide.bio }}
+                </p>
+
+                <!-- QUICK INFO GRID -->
+                <div class="grid grid-cols-2 gap-4 mt-8">
+
+                    <div class="bg-white/5 border border-white/10 rounded-xl p-4">
+                        <p class="text-xs text-gray-400">Experience</p>
+                        <p class="text-lg font-semibold mt-1">{{ guide.experience }} Years</p>
+                    </div>
+
+                    <div class="bg-white/5 border border-white/10 rounded-xl p-4">
+                        <p class="text-xs text-gray-400">Location</p>
+                        <p class="text-lg font-semibold mt-1">{{ guide.get_location_display }}</p>
+                    </div>
+
+                </div>
+
+            </div>
 
         </div>
+
     </div>
 
-    <!-- INFO + BOOK -->
-    <div class="bg-white rounded-2xl shadow-lg p-8">
+    <!-- ================= RIGHT: BOOKING CARD ================= -->
+    <div class="lg:col-span-2">
 
-        <h2 class="text-xl font-bold mb-6">
-            Guide Details
-        </h2>
+        <div class="sticky top-24 bg-white/5 border border-white/10 backdrop-blur rounded-3xl p-8 shadow-xl">
 
-        <div class="space-y-4 text-sm">
+            <h2 class="text-2xl font-bold mb-2">
+                Book This Guide
+            </h2>
 
-            <p><span class="font-semibold">Experience:</span> {{ guide.experience }} years</p>
+            <p class="text-sm text-gray-400 mb-6">
+                Secure your adventure with trusted local experts
+            </p>
 
-            <p><span class="font-semibold">Location:</span> {{ guide.get_location_display }}</p>
+            <!-- INFO BOX -->
+            <div class="space-y-3 text-sm text-gray-300 mb-6">
+
+                <div class="flex justify-between">
+                    <span>Experience</span>
+                    <span class="text-white font-semibold">{{ guide.experience }} yrs</span>
+                </div>
+
+                <div class="flex justify-between">
+                    <span>Location</span>
+                    <span class="text-white font-semibold">{{ guide.get_location_display }}</span>
+                </div>
+
+                <div class="flex justify-between">
+                    <span>Status</span>
+                    <span class="text-emerald-400 font-semibold">Available</span>
+                </div>
+
+            </div>
+
+            <!-- CTA -->
+            <a href="{% url 'book_guide' guide.id %}"
+               class="block text-center bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl font-semibold transition shadow-lg hover:shadow-emerald-500/30">
+                Book Now
+            </a>
+
+            <p class="text-xs text-gray-500 text-center mt-4">
+                No hidden charges • Instant confirmation
+            </p>
 
         </div>
-
-        <!-- BOOK BUTTON -->
-        <a href="{% url 'book_guide' guide.id %}">
-            <button class="w-full mt-8 bg-emerald-700 text-white py-3 rounded-xl hover:bg-emerald-800 transition">
-                Book This Guide
-            </button>
-        </a>
 
     </div>
 

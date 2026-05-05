@@ -2,83 +2,80 @@
 
 {% block base %}
 
-<div class="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white px-6 py-10">
+<div class="min-h-screen bg-gradient-to-br from-gray-950 via-black to-gray-900 text-white px-6 py-10">
 
-    <!-- HEADER -->
-    <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-10 gap-4">
+    <!-- ================= HEADER ================= -->
+    <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-10 gap-6">
 
         <div>
-            <h1 class="text-3xl md:text-4xl font-bold leading-tight">
-                Welcome, {{ request.user.username }} 👋
+            <h1 class="text-3xl md:text-4xl font-bold">
+                Welcome back, {{ request.user.username }} 👋
             </h1>
-            <p class="text-gray-400 text-sm mt-1">
-                Manage your posts and explore your journey
+
+            <p class="text-gray-400 text-sm mt-2">
+                Manage your travel stories, guides and experiences
             </p>
         </div>
 
-        <!-- ACTION BUTTONS -->
         <div class="flex gap-3">
+
             <a href="{% url 'create_post' %}"
-               class="px-5 py-2 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl shadow hover:scale-105 transition">
-                + Create
+               class="px-5 py-2 bg-emerald-600 hover:bg-emerald-700 rounded-xl shadow-md transition">
+                + New Post
             </a>
 
             <a href="{% url 'home' %}"
-               class="px-5 py-2 bg-white/10 backdrop-blur rounded-xl hover:bg-white hover:text-black transition">
+               class="px-5 py-2 bg-white/10 hover:bg-white hover:text-black rounded-xl transition">
                 Home
             </a>
+
         </div>
 
     </div>
 
-    <!-- STATS -->
+    <!-- ================= STATS ================= -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
 
-        <div class="bg-white/10 backdrop-blur-lg p-6 rounded-2xl shadow hover:scale-105 transition">
-            <h2 class="text-sm text-gray-400 uppercase tracking-wide">Your Posts</h2>
-            <p class="text-3xl font-bold mt-2">
-                {{ posts.count }}
-            </p>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-emerald-500/40 transition">
+            <p class="text-xs text-gray-400 uppercase tracking-widest">Posts</p>
+            <h2 class="text-3xl font-bold mt-2">{{ posts.count }}</h2>
         </div>
 
-        <div class="bg-white/10 backdrop-blur-lg p-6 rounded-2xl shadow hover:scale-105 transition">
-            <h2 class="text-sm text-gray-400 uppercase tracking-wide">Total Likes</h2>
-            <p class="text-3xl font-bold mt-2">
-                {{ total_likes }}
-            </p>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-emerald-500/40 transition">
+            <p class="text-xs text-gray-400 uppercase tracking-widest">Total Likes</p>
+            <h2 class="text-3xl font-bold mt-2">{{ total_likes }}</h2>
         </div>
 
-        <div class="bg-white/10 backdrop-blur-lg p-6 rounded-2xl shadow hover:scale-105 transition">
-            <h2 class="text-sm text-gray-400 uppercase tracking-wide">Account</h2>
-            <p class="text-lg mt-2 text-green-400">
-                ● Active
-            </p>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+            <p class="text-xs text-gray-400 uppercase tracking-widest">Account Status</p>
+            <p class="text-emerald-400 font-semibold mt-2">Active ●</p>
         </div>
 
     </div>
 
-    <!-- CATEGORY CARDS -->
+    <!-- ================= CATEGORY ================= -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-14">
 
-        <div class="group p-6 bg-gradient-to-br from-blue-500/20 to-blue-700/20 rounded-2xl hover:scale-105 transition cursor-pointer">
-            <h2 class="text-xl font-semibold">📖 Story</h2>
-            <p class="text-gray-300 text-sm mt-2">Share your travel story</p>
+        <div class="p-6 rounded-2xl bg-blue-500/10 border border-blue-500/20 hover:border-blue-400 transition">
+            <h2 class="text-lg font-semibold">📖 Stories</h2>
+            <p class="text-sm text-gray-400 mt-2">Share travel experiences</p>
         </div>
 
-        <div class="group p-6 bg-gradient-to-br from-green-500/20 to-green-700/20 rounded-2xl hover:scale-105 transition cursor-pointer">
-            <h2 class="text-xl font-semibold">🧭 Guide</h2>
-            <p class="text-gray-300 text-sm mt-2">Create travel guides</p>
+        <div class="p-6 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 hover:border-emerald-400 transition">
+            <h2 class="text-lg font-semibold">🧭 Guides</h2>
+            <p class="text-sm text-gray-400 mt-2">Create travel guides</p>
         </div>
 
-        <div class="group p-6 bg-gradient-to-br from-pink-500/20 to-pink-700/20 rounded-2xl hover:scale-105 transition cursor-pointer">
-            <h2 class="text-xl font-semibold">✨ Experience</h2>
-            <p class="text-gray-300 text-sm mt-2">Share experiences</p>
+        <div class="p-6 rounded-2xl bg-pink-500/10 border border-pink-500/20 hover:border-pink-400 transition">
+            <h2 class="text-lg font-semibold">✨ Experiences</h2>
+            <p class="text-sm text-gray-400 mt-2">Share memorable moments</p>
         </div>
 
     </div>
 
-    <!-- USER POSTS -->
+    <!-- ================= POSTS ================= -->
     <div>
+
         <div class="flex items-center justify-between mb-6">
             <h2 class="text-2xl font-bold">Your Posts</h2>
             <span class="text-sm text-gray-400">{{ posts.count }} total</span>
@@ -88,41 +85,43 @@
 
             {% for post in posts %}
 
-            <div class="group relative bg-white/5 backdrop-blur rounded-2xl overflow-hidden shadow hover:shadow-xl transition">
+            <div class="group bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:border-white/30 transition">
 
                 <!-- IMAGE -->
-                <div class="h-52 overflow-hidden">
+                <div class="h-52 overflow-hidden bg-black">
+
                     {% if post.picture %}
-                        <img src="{{ post.picture.url }}"
-                             class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <img src="{{ post.picture.url }}"
+                         class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                     {% endif %}
+
                 </div>
 
                 <!-- CONTENT -->
-                <div class="p-4">
+                <div class="p-5">
 
-                    <span class="text-xs text-gray-400 uppercase tracking-wide">
+                    <p class="text-xs text-gray-400 uppercase tracking-widest">
                         {{ post.category }}
-                    </span>
+                    </p>
 
                     <h3 class="text-lg font-semibold mt-1 line-clamp-1">
                         {{ post.title }}
                     </h3>
 
-                    <p class="text-sm text-gray-400 mt-1 line-clamp-2">
+                    <p class="text-sm text-gray-400 mt-2 line-clamp-2">
                         {{ post.description }}
                     </p>
 
                     <!-- FOOTER -->
-                    <div class="mt-4 flex justify-between items-center">
+                    <div class="flex justify-between items-center mt-5">
 
                         <span class="text-sm text-gray-300">
                             ❤️ {{ post.total_likes }}
                         </span>
 
                         <a href="{% url 'cart1' post.id %}"
-                           class="text-xs bg-white/10 px-3 py-1 rounded-full hover:bg-white hover:text-black transition">
-                            View →
+                           class="text-xs px-3 py-1 bg-white/10 hover:bg-white hover:text-black rounded-full transition">
+                            View
                         </a>
 
                     </div>
@@ -133,13 +132,18 @@
 
             {% empty %}
 
-            <div class="col-span-full text-center py-12 text-gray-400">
-                No posts yet. Create your first post 🚀
+            <div class="col-span-full text-center py-16 text-gray-400">
+                <p class="text-lg">No posts yet</p>
+                <a href="{% url 'create_post' %}"
+                   class="inline-block mt-4 px-5 py-2 bg-emerald-600 rounded-xl hover:bg-emerald-700 transition">
+                    Create your first post
+                </a>
             </div>
 
             {% endfor %}
 
         </div>
+
     </div>
 
 </div>
